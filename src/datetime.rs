@@ -30,6 +30,9 @@ use crate::{Datelike, Timelike, Weekday};
 #[cfg(any(feature = "alloc", feature = "std", test))]
 use core::borrow::Borrow;
 
+#[cfg(feature = "rkyv")]
+use rkyv::{Archive, Deserialize, Serialize};
+
 /// Specific formatting options for seconds. This may be extended in the
 /// future, so exhaustive matching in external code is not recommended.
 ///
@@ -67,6 +70,7 @@ pub enum SecondsFormat {
 /// the general-purpose constructors are all via the methods on the
 /// [`TimeZone`](./offset/trait.TimeZone.html) implementations.
 #[derive(Clone)]
+#[cfg_attr(feature = "rkyv", derive(Archive, Deserialize, Serialize))]
 pub struct DateTime<Tz: TimeZone> {
     datetime: NaiveDateTime,
     offset: Tz::Offset,
