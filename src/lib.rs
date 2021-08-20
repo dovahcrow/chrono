@@ -518,25 +518,25 @@ pub use round::{DurationRound, RoundingError, SubsecRound};
 /// A convenience module appropriate for glob imports (`use chrono::prelude::*;`).
 pub mod prelude {
     #[doc(no_inline)]
-    pub use Date;
+    pub use super::Date;
     #[cfg(feature = "clock")]
     #[doc(no_inline)]
-    pub use Local;
+    pub use super::Local;
     #[cfg(feature = "unstable-locales")]
     #[doc(no_inline)]
-    pub use Locale;
+    pub use super::Locale;
     #[doc(no_inline)]
-    pub use SubsecRound;
+    pub use super::SubsecRound;
     #[doc(no_inline)]
-    pub use {DateTime, SecondsFormat};
+    pub use super::{DateTime, SecondsFormat};
     #[doc(no_inline)]
-    pub use {Datelike, Month, Timelike, Weekday};
+    pub use super::{Datelike, Month, Timelike, Weekday};
     #[doc(no_inline)]
-    pub use {FixedOffset, Utc};
+    pub use super::{FixedOffset, Utc};
     #[doc(no_inline)]
-    pub use {NaiveDate, NaiveDateTime, NaiveTime};
+    pub use super::{NaiveDate, NaiveDateTime, NaiveTime};
     #[doc(no_inline)]
-    pub use {Offset, TimeZone};
+    pub use super::{Offset, TimeZone};
 }
 
 // useful throughout the codebase
