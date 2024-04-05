@@ -34,6 +34,8 @@ use crate::{Datelike, Months, TimeDelta, Timelike, Weekday};
 #[cfg(any(feature = "rkyv", feature = "rkyv-16", feature = "rkyv-32", feature = "rkyv-64"))]
 use rkyv::{Archive, Deserialize, Serialize};
 
+#[cfg(feature = "abi-stable")]
+use abi_stable::StableAbi;
 /// documented at re-export site
 #[cfg(feature = "serde")]
 pub(super) mod serde;
@@ -47,6 +49,7 @@ mod tests;
 /// the general-purpose constructors are all via the methods on the
 /// [`TimeZone`](./offset/trait.TimeZone.html) implementations.
 #[derive(Clone)]
+#[cfg_attr(feature = "abi-stable", derive(StableAbi), repr(C), sabi(bound(Tz::Offset: StableAbi)))]
 #[cfg_attr(
     any(feature = "rkyv", feature = "rkyv-16", feature = "rkyv-32", feature = "rkyv-64"),
     derive(Archive, Deserialize, Serialize),
