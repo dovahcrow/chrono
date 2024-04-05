@@ -9,6 +9,9 @@ use core::str::FromStr;
 #[cfg(any(feature = "rkyv", feature = "rkyv-16", feature = "rkyv-32", feature = "rkyv-64"))]
 use rkyv::{Archive, Deserialize, Serialize};
 
+#[cfg(feature = "abi-stable")]
+use abi_stable::StableAbi;
+
 use super::{MappedLocalTime, Offset, TimeZone};
 use crate::format::{scan, ParseError, OUT_OF_RANGE};
 use crate::naive::{NaiveDate, NaiveDateTime};
@@ -20,6 +23,7 @@ use crate::naive::{NaiveDate, NaiveDateTime};
 /// `DateTime<FixedOffset>` instances. See the [`east_opt`](#method.east_opt) and
 /// [`west_opt`](#method.west_opt) methods for examples.
 #[derive(PartialEq, Eq, Hash, Copy, Clone)]
+#[cfg_attr(feature = "abi-stable", derive(StableAbi), repr(C))]
 #[cfg_attr(
     any(feature = "rkyv", feature = "rkyv-16", feature = "rkyv-32", feature = "rkyv-64"),
     derive(Archive, Deserialize, Serialize),
